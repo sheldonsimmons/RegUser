@@ -17,14 +17,15 @@ public class UserDB {
         PreparedStatement ps = null;
 
         String query
-                = "INSERT INTO Register (email, firstname, lastname, phonenumber) "
-                + "VALUES (?, ?, ?, ?)";
+                = "INSERT INTO Register (email, firstname, lastname, phonenumber, message1) "
+                + "VALUES (?, ?, ?, ?, ?)";
         try {
             ps = connection.prepareStatement(query);
             ps.setString(1, user.getEmail());
             ps.setString(2, user.getFirstName());
             ps.setString(3, user.getLastName());
             ps.setString(4, user.getPhoneNumber());
+            ps.setString(5, user.getMessage1());
 
             return ps.executeUpdate();
         } catch (SQLException e) {
@@ -45,13 +46,15 @@ public class UserDB {
                 + "firstname = ?, "
                 + "lastname = ? "
                 + "email = ?"
-                + "WHERE phonenumber = ?";
+                + "phonenumber = ?"
+                + "WHERE message1 = ?";
         try {
             ps = connection.prepareStatement(query);
             ps.setString(1, user.getFirstName());
             ps.setString(2, user.getLastName());
             ps.setString(3, user.getEmail());
             ps.setString(4, user.getPhoneNumber());
+            ps.setString(5, user.getMessage1());
 
             return ps.executeUpdate();
         } catch (SQLException e) {
@@ -126,6 +129,7 @@ public class UserDB {
                 user.setLastName(rs.getString("lastname"));
                 user.setEmail(rs.getString("email"));
                 user.setPhoneNumber(rs.getString("phonenumber"));
+                user.setMessage1(rs.getString("message1"));
 
             }
             return user;

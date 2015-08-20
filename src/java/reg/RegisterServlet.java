@@ -12,6 +12,10 @@ import javax.servlet.http.*;
 
 
 import data.UserDB;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.mail.MessagingException;
+import util.MailGmail;
 
 public class RegisterServlet extends HttpServlet {
 
@@ -37,9 +41,10 @@ public class RegisterServlet extends HttpServlet {
             String lastName = request.getParameter("lastname");
             String email = request.getParameter("email");
             String phoneNumber = request.getParameter("phonenumber");
+            String message1 = request.getParameter("message1");
 
             // store data in User object
-            User user = new User(firstName, lastName, email, phoneNumber);
+            User user = new User(firstName, lastName, email, phoneNumber, message1);
 
             // validate the parameters
             String message;
@@ -55,9 +60,52 @@ public class RegisterServlet extends HttpServlet {
             }
             request.setAttribute("user", user);
             request.setAttribute("message", message);
+            
+            
         }
+        
+         String email = "kidscornerreg@gmail.com";
+        String firstName = request.getParameter("firstname");
+        String lastName = request.getParameter("lastname");
+        //String email = request.getParameter("email");
+        String phoneNumber = request.getParameter("phonenumber");
+        String message1 = request.getParameter("message1");
+
+        String to = email;
+        String from = email;
+        String subject = "New Preenrollment";
+        String body = "New Pre-enrollment\n " + firstName + "\n"
+                
+                 + lastName
+                + "\n"
+                
+                + phoneNumber
+                + "\n"
+                + message1;
+
+        boolean isBodyHTML = false;
+    
+        try {
+            MailGmail.sendMail(to, from, subject, body, isBodyHTML);
+        } catch (MessagingException e) {
+            String errorMessage
+                    = "ERROR: Unable to send email. "
+                     + e.getMessage();
+            request.setAttribute("errorMessage", errorMessage);
+            this.log(
+                    "Unable to send email. \n"
+                    + "Here is the email you tried to send: \n"
+                    + "=====================================\n"
+                    + "TO: " + email + "\n"
+                    + "FROM: " + from + "\n"
+                    + "SUBJECT: " + subject + "\n"
+                    + "\n"
+                    + body + "\n\n");
+}
         getServletContext()
                 .getRequestDispatcher(url)
                 .forward(request, response);
-    }    
+    
+           
+    }
 }

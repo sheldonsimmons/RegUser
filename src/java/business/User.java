@@ -13,6 +13,15 @@ public class User implements Serializable {
     private String firstname;
     private String lastname;
     private String phonenumber;
+    private String message1;
+
+    public String getMessage1() {
+        return message1;
+    }
+
+    public void setMessage1(String message1) {
+        this.message1 = message1;
+    }
 
     public String getPhoneNumber() {
         return phonenumber;
@@ -27,13 +36,15 @@ public class User implements Serializable {
         firstname = "";
         lastname = "";
         phonenumber="";
+        message1="";
     }
 
-    public User(String firstname, String lastname, String email, String phonenumber) {
+    public User(String firstname, String lastname, String email, String phonenumber, String message1) {
         this.firstname = firstname;
         this.lastname = lastname;
         this.email = email;
         this.phonenumber = phonenumber;
+        this.message1 = message1;
     }
 
     public String getEmail() {

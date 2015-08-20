@@ -15,16 +15,17 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>Thank You</title>
+   <font color="RED"> <title>Thank You</title>
     <link rel="stylesheet" href="styles/main.css" type="text/css"/>    
 </head>
-
+<img src="daycare.jpg" alt="KIDS" width="720" height="355">
+	
 <body>
-    <h2>Thanks you <span>${user.firstName}.</span><br>
+    <h1>Thank you <span>${user.firstName}!</span><br>
         <br>
         
         
-   We will contact you shortly. </h2>
+   We will contact you shortly. </h1>
 
     <%--
     <label>Email:</label>
@@ -40,7 +41,7 @@
     <br>
     <br>
         
-    <font color="green"><h2><p> Refer a friend and receive free child care for a week!</p></h2></font>
+    <font color="#0481b1"><h2><p> Refer a friend and receive free child care for a week!</p></h2></font>
         
 
     <form action="" method="post">
